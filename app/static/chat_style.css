@@ -1,7 +1,8 @@
 .list-messages {
     background-color: #fff;
     height: 500px;
-    color: #A9A9A9;
+    overflow-y: auto;
+    color: #007bff;
     width: 500px;
 }
 

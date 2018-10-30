@@ -1,16 +1,37 @@
 $(document).ready(function () {
-            var socket = io.connect('http://' + document.domain + ':' + location.port);
+    var socket = io.connect('http://' + document.domain + ':' + location.port);
 
-            socket.on('connect', function() {
-                    socket.emit('joined', 'Connected');
-                });
+    socket.on('connect', function () {
+        socket.emit('joined', ' Connected');
+    });
 
-            socket.on('received_message', function(data) {
-                    $('div.list-messages').append('<br>' + $('<div>').text(data.user + ': ' + data.message + ' ').html())
-                });
+    socket.on('message', function (message) {
+        $('div.list-messages').append('<br>' + $('<div>').text(message.user + ': ' + message.message + ' ').html());
+        console.log(message)
+    });
 
-            $('input#send_msg').click(function(){
-                socket.emit('message', {message: $('input[type="text"]').val()});
-                $('input[type="text"]').val("");
-            });
-        });
+    socket.on('received_message', function (data) {
+        var elem = $('div.list-messages');
+        elem.append('<br>' + $('<div>').text(data.user + ': ' + data.message + ' ').html());
+    });
+
+    $('input#join_room').click(function () {
+        socket.emit('join_room', {room: 1});
+    });
+
+    $('input#leave_room').click(function () {
+        socket.emit('leave_room', {room: 1});
+    });
+
+    $('input#send_msg').click(function () {
+        socket.emit('message', {message: $('input[type="text"]').val(), room: 1});
+        $('input[type="text"]').val("");
+    });
+
+    $('#message').keypress(function (e) {
+        var key = e.which;
+        if (key == 13) {
+            $('input#send_msg').click();
+        }
+    })
+});
