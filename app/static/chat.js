@@ -1,30 +1,31 @@
 $(document).ready(function () {
     var socket = io.connect('http://' + document.domain + ':' + location.port);
+    room_number = 0;
 
     socket.on('connect', function () {
         socket.emit('joined', ' Connected');
     });
 
     socket.on('message', function (message) {
-        $('div.list-messages').append('<br>' + $('<div>').text(message).html());
-        console.log(message)
-    });
-
-    socket.on('received_message', function (data) {
-        var elem = $('div.list-messages');
-        elem.append('<br>' + $('<div>').text(data.user + ': ' + data.message + ' ').html());
+        console.log(message);
+        $('div.list-messages').append('<br>' + $('<div>').text(message.user + ': ' + message.message).html());
     });
 
     $('div.join_room').click(function () {
-        socket.emit('join_room', {room: 1});
+        var room = parseInt($(this).parent().parent().attr('id'));
+        socket.emit('join_room', {room: room});
+        room_number = room;
     });
 
     $('button.leave_room').click(function () {
-        socket.emit('leave_room', {room: 1});
+        var room = parseInt($(this).parent().parent().parent().attr('id'));
+        socket.emit('leave_room', {room: room});
+        $('div#'+room).remove();
+        room_number = 0;
     });
 
     $('input#send_msg').click(function () {
-        socket.emit('message', {message: $('input[type="text"]').val(), room: 1});
+        socket.emit('message', {message: $('input[type="text"]').val(), room: room_number});
         $('input[type="text"]').val("");
     });
 
