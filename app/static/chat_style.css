@@ -3,10 +3,16 @@
     height: 500px;
     overflow-y: auto;
     color: #007bff;
-    width: 500px;
 }
 
-.row {
-    width: 500px;
-    background-color: #fff;
+.mt-1 {
+    background-color: #e0e0e0;
+    height: 60px;
+    text-decoration: none;
+}
+
+.mt-1:hover {
+    background-color: #fafafa;
+    height: 60px;
+    text-decoration: none;
 }

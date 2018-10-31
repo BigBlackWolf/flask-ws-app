@@ -5,7 +5,6 @@ from flask_login import current_user
 class Chat(Namespace):
     def on_joined(self, message):
         print(current_user.username + message)
-        emit('status', {'data': 'Hello'})
 
     def on_message(self, data):
         data['user'] = current_user.username

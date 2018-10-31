@@ -6,7 +6,7 @@ $(document).ready(function () {
     });
 
     socket.on('message', function (message) {
-        $('div.list-messages').append('<br>' + $('<div>').text(message.user + ': ' + message.message + ' ').html());
+        $('div.list-messages').append('<br>' + $('<div>').text(message).html());
         console.log(message)
     });
 
@@ -15,11 +15,11 @@ $(document).ready(function () {
         elem.append('<br>' + $('<div>').text(data.user + ': ' + data.message + ' ').html());
     });
 
-    $('input#join_room').click(function () {
+    $('div.join_room').click(function () {
         socket.emit('join_room', {room: 1});
     });
 
-    $('input#leave_room').click(function () {
+    $('button.leave_room').click(function () {
         socket.emit('leave_room', {room: 1});
     });
 
