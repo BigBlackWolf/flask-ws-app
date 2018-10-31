@@ -1,5 +1,5 @@
 $(document).ready(function () {
-    var socket = io.connect('http://' + document.domain + ':' + location.port);
+    var socket = io.connect(location.origin);
     room_number = 0;
 
     socket.on('connect', function () {

@@ -51,3 +51,7 @@ def logout():
     session.clear()
     return redirect(url_for('main.index'))
 
+
+@main.route('/stream', methods=('GET', 'POST'))
+def audio():
+    return render_template('stream.html')

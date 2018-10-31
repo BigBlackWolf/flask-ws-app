@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="container">
+        <div class="row justify-content-md-center mt-5">
+            <div id="viz">
+                <canvas id="analyser" width="1600" height="300"></canvas>
+                <div id="wavedisplay">
+                    <div id="wavefiles">
+                    </div>
+                </div>
+            </div>
+            <div id="controls">
+                <img id="record" src="{{ url_for('static', filename='mic128.png') }}"
+                     onclick="toggleRecording(this);">
+            </div>
+            <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.0.3/socket.io.slim.js"></script>
+            <script src="{{ url_for('static', filename='stream.js') }}"></script>
+
+        </div>
+    </div>
+
+{% endblock %}

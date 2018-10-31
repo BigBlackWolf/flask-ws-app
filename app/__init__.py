@@ -5,6 +5,7 @@ from flask_migrate import Migrate
 from flask_login import LoginManager
 
 from app.events import Chat
+from app.stream import Stream
 from config import Config
 
 socketio = SocketIO()
@@ -23,6 +24,7 @@ def create_app():
 
     socketio.init_app(app)
     socketio.on_namespace(Chat('/'))
+    socketio.on_namespace(Stream('/stream'))
     db.init_app(app)
     migrate.init_app(app, db)
     login.init_app(app)
