@@ -1,6 +1,5 @@
 venv/
 migrations/
-app.db
 __pycache__/
 .idea/
 .DS_Store
